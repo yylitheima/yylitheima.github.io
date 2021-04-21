@@ -5,13 +5,13 @@
   
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="http://example.com">
+  <link rel="dns-prefetch" href="https://yylitheima.github.io">
   <title>余燕琳的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="很随意的博客">
 <meta property="og:type" content="website">
 <meta property="og:title" content="余燕琳的博客">
-<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:url" content="https://yylitheima.github.io/index.html">
 <meta property="og:site_name" content="余燕琳的博客">
 <meta property="og:description" content="很随意的博客">
 <meta property="og:locale" content="en_US">
@@ -147,6 +147,84 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-jucccc" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/21/jucccc/">juc --常用的三大辅助类</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/21/jucccc/" class="archive-article-date">
+  	<time datetime="2021-04-21T14:35:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="CountDownLatch"><a href="#CountDownLatch" class="headerlink" title="CountDownLatch"></a>CountDownLatch</h2><p>允许一个或多个线程直到在其他线程中执行的一组操作完成的同步辅助。</p>
+<p><strong>方法：</strong></p>
+<p>countDown(): 每调用一次，计数器就减一。</p>
+<p>await() :阻塞当前线程，直到由于countDown()方法的调用而导致当前计数达到零。</p>
+<p>构造方法 CountDownLatch(int count)  ：count指总数。</p>
+<h2 id="CyclicBarrier"><a href="#CyclicBarrier" class="headerlink" title="CyclicBarrier"></a>CyclicBarrier</h2><p>允许一组线程全部等待彼此达到共同屏障点的同步辅助。循环阻塞在涉及固定大小的线程方的程序中很有用，这些线程必须偶尔等待彼此。屏障被称为循环，因为它可以在等待的线程被释放后重新使用。</p>
+<p><strong>方法：</strong></p>
+<p>构造方法CyclicBarrier(int parties,Runnable barrierAction) : parties指总数。</p>
+<p>await():  每执行一次计数器就减一，并阻塞当前线程，直到计数达到零才会完整执行。</p>
+<h2 id="Semaphore"><a href="#Semaphore" class="headerlink" title="Semaphore"></a>Semaphore</h2><p>一个技术信号量。在概念上，信号量维持一组许可证。如有必要，每个acquire()都会阻塞，直到许可证可用，然后才能使用它。每个release()添加许可证，潜在地释放阻塞获取方。但是，没有使用实际的许可对象，Semaphore只保留可用数量的计数。</p>
+<p><strong>方法：</strong></p>
+<p>构造方法Semaphore(int permits) : permits指许可证的个数。</p>
+<p>acquire(): 获得许可证。如果当前没有可用的许可证则阻塞该线程。</p>
+<p>release(): 添加许可证，释放阻塞获取方。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Semaphore semaphore=<span class="keyword">new</span> Semaphore(<span class="number">3</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">6</span>;i++)&#123;</span><br><span class="line">    <span class="keyword">new</span> Thread(() -&gt;&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            semaphore.acquire();</span><br><span class="line">            System.out.println(Thread.currentThread().getName()+<span class="string">&quot;捡到车位&quot;</span>);</span><br><span class="line">            System.out.println(Thread.currentThread().getName()+<span class="string">&quot;离开车位&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">            semaphore.release();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,String.valueOf(i)).start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/.io//01.PNG" alt="示例图片"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/21/jucccc/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-title" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
