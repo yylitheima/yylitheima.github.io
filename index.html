@@ -148,6 +148,73 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-mybatis一级缓存和二级缓存" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/04/24/mybatis%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98%E5%92%8C%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98/">mybatis一级缓存和二级缓存</a>
+    </h1>
+  
+
+        
+        <a href="/2021/04/24/mybatis%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98%E5%92%8C%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98/" class="archive-article-date">
+  	<time datetime="2021-04-24T07:33:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一级缓存："><a href="#一级缓存：" class="headerlink" title="一级缓存："></a>一级缓存：</h2><p>一级缓存是mybatis默认帮我们开启的。一级缓存的作用域是同一个SqlSession，SqlSession的作用就是建立与数据库的会话。在同一个SqlSession中，执行相同的sql语句查询时：第一次会去查询数据库，并写在缓存中，第二次会直接从缓存中取。 当执行SQL时候两次查询中间发生了增删改的操作，则SQLSession的缓存会被清空。 每次查询会先去缓存中找，如果找不到，再去数据库查询，然后把结果写到缓存中。 Mybatis的内部缓存使用一个HashMap，key为hashcode+statementId+sql语句。Value为查询出来的结果集映射成的java对象。 SqlSession执行insert、update、delete等操作commit后会清空该SQLSession缓存。</p>
+<p>SqlSession默认执行完一段的sql片段会执行close()方法销毁sqlSession,而下一次对数据库的操作又会重新建立新的SqlSession，这和前一次的SqlSession不存在一级缓存关系。</p>
+<h2 id="二级缓存："><a href="#二级缓存：" class="headerlink" title="二级缓存："></a>二级缓存：</h2><p>二级缓存是基于namespace和mapper的作用域起作用的，不依赖于SqlSession。</p>
+<p>开启二级缓存的方法：在mybatis-config.xml文件中的<settings>标签配置开启缓存 <setting name="cacheEnabled" value="true"> 单单配置这个是不够的，还需要在mapper的xml文件下开启缓存，即加入<cache>标签。</cache></setting></settings></p>
+<p>二级缓存需要查询结果映射的pojo类序列化和反序列化，因为二级缓存数据存储介质多种多样，不一定在内存有可能是在硬盘或者远程服务器。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/04/24/mybatis%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%98%E5%92%8C%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-jucccc" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -542,5 +609,8 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
 
 </div>
   </div>
+
+  <script type="text/javascript" src="/js/snow2.js"></script>
+
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
